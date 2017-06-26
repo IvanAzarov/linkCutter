@@ -18,6 +18,14 @@ if ($_POST['link']) {
 		} else {
 			$protocol = "";
 		}
+		$linkArr = explode ('.', $link);
+		if (sizeOf ($linkArr) > 1) {
+			if ($linkArr[0] === "www") {
+				$link = $linkArr[1];
+			} else {
+				$link = preg_replace('/[^\p{L}\p{N}\s]/u', '', $link);
+			}
+		}
 		if ($_POST['customLink']) {
 			echo '<a href="' . $_POST['link'] . '">' . $protocol . $link . $domain . '</a>';
 		} else {
